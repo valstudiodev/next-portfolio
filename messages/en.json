@@ -1,0 +1,24 @@
+{
+  "HomePage": {
+    "title": "Portfolio",
+    "description": "Web developer portfolio"
+  },
+  "AboutPage": {
+    "title": "About me",
+    "description": "I am a web developer focused on creating modern, accessible, and interactive digital experiences."
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "description": "A selection of projects and digital experiences I have created."
+  },
+  "ContactsPage": {
+    "title": "Contacts",
+    "description": "Let us discuss your next digital project."
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contacts": "Contacts"
+  }
+}

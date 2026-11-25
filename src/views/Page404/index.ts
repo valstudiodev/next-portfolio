@@ -1,0 +1,1 @@
+export { Page404 } from '@/views/Page404/ui/Page404'

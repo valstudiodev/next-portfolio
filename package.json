@@ -1,0 +1,45 @@
+{
+  "name": "portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/time-tracker.cjs start",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest",
+    "dev:next": "next dev",
+    "stat": "node scripts/time-tracker.cjs stat"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^7.0.8",
+    "@reduxjs/toolkit": "^2.15.0",
+    "lucide-react": "^1.77.0",
+    "next": "16.4.6",
+    "next-intl": "^4.15.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-hook-form": "^7.92.0",
+    "react-redux": "^9.3.1",
+    "yup": "^1.7.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "4.3.3",
+    "@testing-library/jest-dom": "^8.0.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.13",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.3.0",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.5",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "jsdom": "^29.1.1",
+    "sass": "^1.108.2",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5",
+    "vitest": "^5.1.1"
+  }
+}

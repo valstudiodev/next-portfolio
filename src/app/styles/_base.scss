@@ -1,0 +1,27 @@
+@use "sass:math";
+@use '../../shared/styles/settings/settings' as *;
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {}
+
+[class*="__container"] {
+  max-width: toRem($containerWidth);
+  padding-inline: toRem(math.div($containerPadding, 2));
+  margin: 0 auto;
+}
+
+html[data-menu-open='true'] {
+  overflow: hidden;
+  touch-action: none;
+  overscroll-behavior: none;
+  scrollbar-width: none;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}

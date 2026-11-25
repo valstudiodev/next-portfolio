@@ -1,0 +1,32 @@
+.page404 {
+  display: flex;
+  min-height: 60vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+
+  &__status {
+    color: #71717a;
+    font-size: 5rem;
+    font-weight: 700;
+  }
+
+  &__title {
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+
+  &__description {
+    color: #52525b;
+  }
+
+  &__link {
+    padding: 0.75rem 1.25rem;
+    border: 1px solid #27272a;
+    border-radius: 0.375rem;
+    color: #27272a;
+  }
+}

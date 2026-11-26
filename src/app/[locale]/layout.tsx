@@ -10,6 +10,7 @@ import { routing } from '@/i18n/routing';
 import './globals.css';
 import '@/app/styles/globals.scss';
 import { Header } from '@/widgets/Header';
+import { InputModeProvider } from '../providers/InputModeProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -58,13 +59,15 @@ export default async function LocaleLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <InputModeProvider>
+          <StoreProvider>
+            <NextIntlClientProvider messages={messages}>
+              <Header />
+              {children}
+            </NextIntlClientProvider>
+          </StoreProvider>
+        </InputModeProvider>
 
-        <StoreProvider>
-          <NextIntlClientProvider messages={messages}>
-            <Header />
-            {children}
-          </NextIntlClientProvider>
-        </StoreProvider>
       </body>
     </html>
   );

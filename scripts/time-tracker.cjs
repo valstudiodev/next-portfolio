@@ -8,6 +8,26 @@ const DAILY_GOAL_HOURS = 4;
 const BREAK_MINUTES = 50;
 const STATS_FILE = path.join(process.cwd(), 'stats.json');
 
+function openBrowser(url) {
+  const platformCommands = {
+    win32: ['cmd', ['/c', 'start', '', url]],
+    darwin: ['open', [url]],
+    linux: ['xdg-open', [url]],
+  };
+
+  const command = platformCommands[process.platform];
+
+  if (!command) {
+    console.warn(`Не вдалося відкрити браузер автоматично на ${process.platform}`);
+    return;
+  }
+
+  spawn(command[0], command[1], {
+    detached: true,
+    stdio: 'ignore',
+  }).unref();
+}
+
 function loadStats() {
   if (!fs.existsSync(STATS_FILE)) {
     return { sessions: [] };
@@ -51,22 +71,35 @@ if (arg === 'start') {
 
   console.log(
     '\n' +
-      chalk.bgBlue.white(' TRACKER ') +
-      chalk.cyan(` Сесія розпочата: ${new Date().toLocaleTimeString()}`),
+    chalk.bgBlue.white(' TRACKER ') +
+    chalk.cyan(` Сесія розпочата: ${new Date().toLocaleTimeString()}`),
   );
 
   const child = spawn('npx', ['next', 'dev'], {
-    stdio: 'inherit',
+    stdio: ['inherit', 'pipe', 'inherit'],
     shell: true,
+  });
+
+  let browserOpened = false;
+
+  child.stdout.on('data', (data) => {
+    const output = data.toString();
+
+    process.stdout.write(output);
+
+    if (!browserOpened && output.includes('Local:')) {
+      browserOpened = true;
+      openBrowser('http://localhost:3000/en');
+    }
   });
 
   const breakTimer = setInterval(() => {
     process.stdout.write(
       '\n' +
-        chalk.bgRed.white.bold(' ☕ ПЕРЕРВА! ') +
-        chalk.bold.red(
-          ` Ви працюєте вже ${BREAK_MINUTES} хв. Зробіть паузу!\n`,
-        ),
+      chalk.bgRed.white.bold(' ☕ ПЕРЕРВА! ') +
+      chalk.bold.red(
+        ` Ви працюєте вже ${BREAK_MINUTES} хв. Зробіть паузу!\n`,
+      ),
     );
   }, 1000 * 60 * BREAK_MINUTES);
 
@@ -92,8 +125,8 @@ if (arg === 'start') {
 
       process.stdout.write(
         '\n' +
-          chalk.bgGreen.black(' SAVED ') +
-          ` Працювали: ${formatTime(durationSec)}\n`,
+        chalk.bgGreen.black(' SAVED ') +
+        ` Працювали: ${formatTime(durationSec)}\n`,
       );
     }
 
@@ -154,6 +187,6 @@ if (arg === 'stat') {
   console.log(table.toString());
   console.log(
     chalk.bold.bgGreen.black(` УСЬОГО ВІДПРАЦЬОВАНО: ${formatTime(totalSec)} `) +
-      '\n',
+    '\n',
   );
 }
